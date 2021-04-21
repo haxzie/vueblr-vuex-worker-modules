@@ -1,28 +1,74 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="contents">
+      <h3>{{ time }}</h3>
+      <img src="@/assets/nyancat.gif"/>
+      <button class="btn">Ba Ba Button!</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      time: 0
+    }
+  },
+  methods: {
+
+  },
+  mounted() {
+    setInterval(() => {
+      this.time = this.time + 1
+    }, 100)
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+  background: #013368;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+      color: white;
+      font-size: 3rem;
+      margin: 20px;
+    }
+    
+    .btn {
+      margin: 10px 0;
+      border: 0;
+      padding: 15px 20px;
+      border-radius: 10px;
+      // box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+      background: rgb(235, 44, 149);
+      border: 3px solid white;
+      color: white;
+      transition: 0.2s all ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
 }
 </style>
