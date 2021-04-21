@@ -3,7 +3,8 @@
     <div class="contents">
       <h3>{{ time }}</h3>
       <img src="@/assets/nyancat.gif"/>
-      <button class="btn">Ba Ba Button!</button>
+      <button class="btn" @click="expensiveFn">Ba Ba Button!</button>
+      <p class="message">{{message}}</p>
     </div>
   </div>
 </template>
@@ -14,11 +15,18 @@ export default {
   name: 'App',
   data() {
     return {
-      time: 0
+      time: 0,
+      message: ""
     }
   },
   methods: {
-
+    expensiveFn() {
+      this.message = "Executing expensive function..."
+      for (let i =  0; i< 100*500; i++) {
+        localStorage.setItem('test',i)
+      }
+      this.message = "Execution completed"
+    }
   },
   mounted() {
     setInterval(() => {
@@ -68,6 +76,10 @@ export default {
       &:active {
         transform: scale(0.95);
       }
+    }
+
+    .message {
+      color: white;
     }
   }
 }
