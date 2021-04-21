@@ -2,38 +2,36 @@
   <div id="app">
     <div class="contents">
       <h3>{{ time }}</h3>
-      <img src="@/assets/nyancat.gif"/>
-      <button class="btn" @click="expensiveFn">Ba Ba Button!</button>
-      <p class="message">{{message}}</p>
+      <img src="@/assets/nyancat.gif" />
+      <button class="btn" @click="handleClick">Ba Ba Button!</button>
     </div>
   </div>
 </template>
 
 <script>
+// import workers 
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
       time: 0,
-      message: ""
-    }
+    };
   },
   methods: {
-    expensiveFn() {
-      this.message = "Executing expensive function..."
-      for (let i =  0; i< 100*500; i++) {
-        localStorage.setItem('test',i)
-      }
-      this.message = "Execution completed"
-    }
+    async handleClick() {
+      console.log("Clickity clack!")
+    },
   },
   mounted() {
-    setInterval(() => {
-      this.time = this.time + 1
-    }, 100)
+    this.interval = setInterval(() => {
+      this.time = this.time + 1;
+    }, 100);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval)
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -56,7 +54,7 @@ export default {
       font-size: 3rem;
       margin: 20px;
     }
-    
+
     .btn {
       margin: 10px 0;
       border: 0;

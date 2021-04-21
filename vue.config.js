@@ -1,9 +1,10 @@
-const WorkerPlugin = require("worker-plugin");
-
 module.exports = {
-  configureWebpack: {
-    plugins: [
-      new WorkerPlugin()
-    ],
+  chainWebpack: (config) => {
+    config.module.rules.delete("eslint");
+  },
+  devServer: {
+    watchOptions: {
+      poll: true,
+    },
   },
 };
