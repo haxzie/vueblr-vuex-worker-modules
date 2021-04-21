@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 body {
     font-size: 14px;
     letter-spacing: 0.01em;
@@ -5,7 +6,7 @@ body {
     line-height: 1.5em;
     // font-family: 'Poppins', sans-serif;
     // font-family: "Noto Sans", sans-serif;
-    font-family: "Inter", sans-serif;
+    font-family: 'Press Start 2P', cursive;
     color: var(--font-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -23,7 +24,7 @@ body {
       margin: 0;
       font-weight: 400;
       color: var(--font-color);
-      font-family: "Inter", sans-serif;
+      font-family: 'Press Start 2P', cursive;
     }
   
     a {
