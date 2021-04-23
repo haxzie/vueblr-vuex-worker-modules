@@ -9,8 +9,7 @@
 </template>
 
 <script>
-// import workers 
-
+import { mapActions } from 'vuex';
 export default {
   name: "App",
   data() {
@@ -19,14 +18,16 @@ export default {
     };
   },
   methods: {
+    ...mapActions("App", ["expensiveFn"]),
     async handleClick() {
       console.log("Clickity clack!")
+      this.expensiveFn()
     },
   },
   mounted() {
-    this.interval = setInterval(() => {
-      this.time = this.time + 1;
-    }, 100);
+    // this.interval = setInterval(() => {
+    //   this.time = this.time + 1;
+    // }, 100);
   },
   beforeDestroy() {
     clearInterval(this.interval)
