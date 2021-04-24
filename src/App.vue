@@ -10,6 +10,10 @@
 
 <script>
 import { mapActions } from 'vuex';
+// import * as Comlink from 'comlink';
+// const worker = new Worker("./worker.js", { type: 'module' });
+// const fns = Comlink.wrap(worker);
+
 export default {
   name: "App",
   data() {
@@ -18,20 +22,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions("App", ["expensiveFn"]),
+    ...mapActions("Core", ["expensiveFn"]),
     async handleClick() {
-      console.log("Clickity clack!")
-      this.expensiveFn()
+      console.log("Clickity clack!");
+      // const result = await fns.expensiveFn();
+      // console.log({ result });
+      this.expensiveFn();
     },
   },
   mounted() {
-    // this.interval = setInterval(() => {
-    //   this.time = this.time + 1;
-    // }, 100);
+    this.interval = setInterval(() => {
+      this.time = this.time + 1;
+    }, 100);
   },
   beforeDestroy() {
-    clearInterval(this.interval)
-  }
+    clearInterval(this.interval);
+  },
 };
 </script>
 

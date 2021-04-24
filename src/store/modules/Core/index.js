@@ -14,9 +14,8 @@ export default {
     },
   },
   actions: {
-    expensiveFn: async ({ state, rootState, commit }) => {
+    expensiveFn: async ({ commit }) => {
 
-      console.log(state, rootState)
       console.time("expensiveFn");
       let result = 0;
       for (var i = Math.pow(12, 7); i >= 0; i--) {

@@ -1,8 +1,8 @@
-const WorkerPlugin = require("worker-plugin")
+const WorkerPlugin = require('worker-plugin')
 
 module.exports = {
   chainWebpack: (config) => {
-    // Buhahahahahaa
+    // Annoying!
     config.module.rules.delete("eslint");
   },
   configureWebpack: {

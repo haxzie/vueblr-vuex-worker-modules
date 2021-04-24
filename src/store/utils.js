@@ -4,7 +4,7 @@
  * @param {Object} modules Object containing vuex store modules as key value pairs
  * @param {*} worker Worker which will be running the store
  */
-export function wrap(modules, worker) {
+ export function wrap(modules, worker) {
   if (!(modules && Object.keys(modules).length > 0)) {
     console.error("No modules found");
   }
@@ -70,7 +70,7 @@ export function expose(modules) {
 
     // Monkey patching commit method to relay it back to the main script
     const commit = (type, payload) => {
-      self.postMessage({ moduleId, type, payload });
+      self.postMessage({ module: moduleId, type, payload });
     };
 
     // TODO: Write logic to monkeypatch Dispatch too
@@ -96,5 +96,15 @@ export function expose(modules) {
   self.onmessage = (e) => {
       const { action, context, payload } = e.data;
       workerizedActions[action]({ action, context, payload });
+    //   self.close()
   }
+}
+
+
+export function attach(store, worker) {
+  worker.onmessage = (e) => {
+    console.log({ data: e.data })
+    const { module, type, payload } = e.data;
+    store.commit(`${module}/${type}`, payload, { root: true });
+  };
 }

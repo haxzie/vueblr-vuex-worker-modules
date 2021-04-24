@@ -2,12 +2,12 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createLogger from "vuex/dist/logger";
 import modules from "./modules";
-import {wrap} from "./utils";
+import { wrap, attach } from "./utils"
+const worker = new Worker("./worker.js", { type: 'module'});
 
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== "production";
 // import the worker
-const worker = new Worker("./worker", { type: "module" });
 
 const store = new Vuex.Store({
   // wrap the modules
@@ -19,11 +19,8 @@ const store = new Vuex.Store({
   plugins: debug ? [createLogger()] : [], // set logger only for development
 });
 
-// pipe the message as store commits
-worker.onmessage = (e) => {
-  const { moduleId, type, payload } = e.data;
-  store.commit(`${moduleId}/${type}`, payload, { root: true });
-}
+// pipe the incoming worker message as root store commits
+attach(store, worker);
 
 
 export default store;
